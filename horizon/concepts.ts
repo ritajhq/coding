@@ -291,7 +291,7 @@ export class Resolvers implements Resolver {
     return this
   }
 
-  Resolve<T extends DataStructure>(q: Query<T>): Promise<T> {
+  Resolve<T extends DataStructure>(q: Query<T, any>): Promise<T> {
     const resolver = this.registry.get(q.constructor as Constructor<Query<any, any>>)
 
     if (!resolver) {
@@ -312,7 +312,7 @@ export class Handlers implements Handler {
     return this
   }
 
-  Handle(a: Action): Promise<any> {
+  Handle(a: Action<any, any>): Promise<any> {
     const handler = this.registry.get(a.constructor as Constructor<Action<any, any>>)
 
     if (!handler) {
